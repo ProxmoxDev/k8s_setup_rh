@@ -1,5 +1,8 @@
 #!/bin/bash
 
+KUBERNETES_VERSION=v1.30
+PROJECT_PATH=prerelease:/main
+
 ## swap無効
 swapoff -a && sed -i '/ swap / s/^/#/' /etc/fstab
 
