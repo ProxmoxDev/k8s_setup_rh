@@ -58,6 +58,9 @@ nodeRegistration:
 ---
 apiVersion: kubeadm.k8s.io/v1beta3
 kind: ClusterConfiguration
+networking:
+  serviceSubnet: "192.168.100.0/24"
+  podSubnet: "192.128.100.0/24"
 kubernetesVersion: "${KUBERNETES_VERSION}.0"
 controlPlaneEndpoint: "${KUBE_API_SERVER_VIP}:6443"
 EOF
