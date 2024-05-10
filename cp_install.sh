@@ -46,7 +46,7 @@ systemctl enable kubelet.service
 KUBEADM_BOOTSTRAP_TOKEN=$(openssl rand -hex 3).$(openssl rand -hex 8)
 
 # Set init configuration for the first control plane
-cat > ~/init_kubeadm.yaml <<EOF
+cat > ${pwd}/init_kubeadm.yaml <<EOF
 apiVersion: kubeadm.k8s.io/v1beta3
 kind: InitConfiguration
 bootstrapTokens:
@@ -65,7 +65,7 @@ kubernetesVersion: "${KUBERNETES_VERSION}.0"
 controlPlaneEndpoint: "${KUBE_API_SERVER_VIP}:6443"
 EOF
 
-kubeadm init --config ~/init_kubeadm.yaml
+kubeadm init --config ${pwd}/init_kubeadm.yaml
 
 # kubectl Setting
 mkdir -p $HOME/.kube
@@ -76,7 +76,7 @@ chown $(id -u):$(id -g) $HOME/.kube/config
 KUBEADM_UPLOADED_CERTS=$(kubeadm init phase upload-certs --upload-certs | tail -n 1)
 
 # Set join configuration for other control plane nodes
-cat > ~/join_kubeadm_cp.yaml <<EOF
+cat > ${pwd}/join_kubeadm_cp.yaml <<EOF
 apiVersion: kubeadm.k8s.io/v1beta3
 kind: JoinConfiguration
 nodeRegistration:
@@ -91,7 +91,7 @@ controlPlane:
 EOF
 
 # Set join configuration for worker nodes
-cat > ~/join_kubeadm_wk.yaml <<EOF
+cat > ${pwd}/join_kubeadm_wk.yaml <<EOF
 apiVersion: kubeadm.k8s.io/v1beta3
 kind: JoinConfiguration
 nodeRegistration:
