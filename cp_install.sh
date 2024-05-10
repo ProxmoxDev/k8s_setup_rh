@@ -62,7 +62,7 @@ kubernetesVersion: "${KUBERNETES_VERSION}.0"
 controlPlaneEndpoint: "${KUBE_API_SERVER_VIP}:6443"
 EOF
 
-kubeadm init --config init_kubeadm.yaml
+kubeadm init --config ~/init_kubeadm.yaml
 
 # kubectl Setting
 mkdir -p $HOME/.kube
