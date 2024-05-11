@@ -72,6 +72,10 @@ mkdir -p $HOME/.kube
 cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
 chown $(id -u):$(id -g) $HOME/.kube/config
 
+echo "source <(kubectl completion bash)" >> ~/.bashrc
+alias k=kubectl
+complete -F __start_kubectl k
+
 # Generate control plane certificate
 KUBEADM_UPLOADED_CERTS=$(kubeadm init phase upload-certs --upload-certs | tail -n 1)
 
