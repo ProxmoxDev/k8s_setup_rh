@@ -5,7 +5,10 @@ KUBE_API_SERVER_IP=192.168.100.
 KUBERNETES_VERSION=v1.29
 MANIFEST_VERSION=1.29.0
 REPO_CRIO_PATH=stable:/${KUBERNETES_VERSION}
-REPO_KUBERNETES_VERSION=1.29.0-150500.1.1.x86_64
+REPO_KUBERNETES_VERSION=1.29.0-150500.1.1
+
+## デフォルトで入ってるコンテナパッケージを削除
+dnf remove -y containers-common
 
 ## swap無効
 swapoff -a && sed -i '/ swap / s/^/#/' /etc/fstab
