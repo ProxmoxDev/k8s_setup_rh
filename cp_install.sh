@@ -1,9 +1,11 @@
 #!/bin/bash
 #special thanks https://gist.github.com/inductor/32116c486095e5dde886b55ff6e568c8
 
-KUBE_API_SERVER_VIP=
-KUBERNETES_VERSION=v1.30
-PROJECT_PATH=prerelease:/main
+KUBE_API_SERVER_IP=192.168.100.
+KUBERNETES_VERSION=v1.29
+MANIFEST_VERSION=1.29.0
+REPO_CRIO_PATH=stable:/${KUBERNETES_VERSION}
+REPO_KUBERNETES_VERSION=1.29.0-150500.1.1
 
 ## swap無効
 swapoff -a && sed -i '/ swap / s/^/#/' /etc/fstab
@@ -30,13 +32,18 @@ EOF
 cat <<EOF | tee /etc/yum.repos.d/cri-o.repo
 [cri-o]
 name=CRI-O
-baseurl=https://pkgs.k8s.io/addons:/cri-o:/$PROJECT_PATH/rpm/
+baseurl=https://pkgs.k8s.io/addons:/cri-o:/$REPO_CRIO_PATH/rpm/
 enabled=1
 gpgcheck=1
-gpgkey=https://pkgs.k8s.io/addons:/cri-o:/$PROJECT_PATH/rpm/repodata/repomd.xml.key
+gpgkey=https://pkgs.k8s.io/addons:/cri-o:/$REPO_CRIO_PATH/rpm/repodata/repomd.xml.key
 EOF
 
-dnf install -y container-selinux cri-o kubelet kubeadm kubectl
+dnf install -y \
+  container-selinux \
+  cri-o-${REPO_KUBERNETES_VERSION} \
+  kubelet-${REPO_KUBERNETES_VERSION} \
+  kubeadm-${REPO_KUBERNETES_VERSION}\
+  kubectl-${REPO_KUBERNETES_VERSION}
 
 systemctl enable --now crio.service
 systemctl enable kubelet.service
@@ -61,8 +68,8 @@ kind: ClusterConfiguration
 networking:
   serviceSubnet: "192.168.100.0/24"
   podSubnet: "192.128.100.0/24"
-kubernetesVersion: "${KUBERNETES_VERSION}.0"
-controlPlaneEndpoint: "${KUBE_API_SERVER_VIP}:6443"
+kubernetesVersion: "${MANIFEST_VERSION}"
+controlPlaneEndpoint: "${KUBE_API_SERVER_IP}:6443"
 EOF
 
 kubeadm init --config ~/init_kubeadm.yaml
@@ -87,7 +94,7 @@ nodeRegistration:
   criSocket: "unix:///var/run/crio/crio.sock"
 discovery:
   bootstrapToken:
-    apiServerEndpoint: "${KUBE_API_SERVER_VIP}:6443"
+    apiServerEndpoint: "${KUBE_API_SERVER_IP}:6443"
     token: "$KUBEADM_BOOTSTRAP_TOKEN"
     unsafeSkipCAVerification: true
 controlPlane:
@@ -102,7 +109,7 @@ nodeRegistration:
   criSocket: "unix:///var/run/crio/crio.sock"
 discovery:
   bootstrapToken:
-    apiServerEndpoint: "${KUBE_API_SERVER_VIP}:6443"
+    apiServerEndpoint: "${KUBE_API_SERVER_IP}:6443"
     token: "$KUBEADM_BOOTSTRAP_TOKEN"
     unsafeSkipCAVerification: true
 EOF
