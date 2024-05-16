@@ -39,7 +39,7 @@ gpgkey=https://pkgs.k8s.io/addons:/cri-o:/$REPO_CRIO_PATH/rpm/repodata/repomd.xm
 EOF
 
 dnf install -y \
-  dnf install -y nfs-utils-1:2.5.4-25.el9.x86_64 \
+  nfs-utils-1:2.5.4-25.el9.x86_64 \
   container-selinux \
   cri-o-${REPO_KUBERNETES_VERSION} \
   kubelet-${REPO_KUBERNETES_VERSION} \
