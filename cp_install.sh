@@ -17,8 +17,21 @@ swapoff -a && sed -i '/ swap / s/^/#/' /etc/fstab
 systemctl disable --now firewalld
 
 ## ネットワーク設定
+### https://kubernetes.io/ja/docs/setup/production-environment/container-runtimes/#ipv4%E3%83%95%E3%82%A9%E3%83%AF%E3%83%BC%E3%83%87%E3%82%A3%E3%83%B3%E3%82%B0%E3%82%92%E6%9C%89%E5%8A%B9%E5%8C%96%E3%81%97-iptables%E3%81%8B%E3%82%89%E3%83%96%E3%83%AA%E3%83%83%E3%82%B8%E3%81%95%E3%82%8C%E3%81%9F%E3%83%88%E3%83%A9%E3%83%95%E3%82%A3%E3%83%83%E3%82%AF%E3%82%92%E8%A6%8B%E3%81%88%E3%82%8B%E3%82%88%E3%81%86%E3%81%AB%E3%81%99%E3%82%8B
+cat <<EOF | sudo tee /etc/modules-load.d/k8s.conf
+overlay
+br_netfilter
+EOF
+
 modprobe br_netfilter
-sysctl -w net.ipv4.ip_forward=1
+modprobe overlay
+
+cat <<EOF | sudo tee /etc/sysctl.d/k8s.conf
+net.bridge.bridge-nf-call-iptables  = 1
+net.bridge.bridge-nf-call-ip6tables = 1
+net.ipv4.ip_forward                 = 1
+EOF
+sysctl --system
 
 ## container
 ## https://github.com/cri-o/packaging
