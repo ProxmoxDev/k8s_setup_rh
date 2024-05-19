@@ -7,5 +7,14 @@ chmod 700 get_helm.sh
 ./get_helm.sh
 
 ## kubectl
+cat <<EOF | tee /etc/yum.repos.d/kubernetes.repo
+[kubernetes]
+name=Kubernetes
+baseurl=https://pkgs.k8s.io/core:/stable:/$KUBERNETES_VERSION/rpm/
+enabled=1
+gpgcheck=1
+gpgkey=https://pkgs.k8s.io/core:/stable:/$KUBERNETES_VERSION/rpm/repodata/repomd.xml.key
+EOF
+
 dnf install -y \
   kubectl-${REPO_KUBERNETES_VERSION}
