@@ -13,7 +13,7 @@ backend k8s-api
   mode tcp
   balance roundrobin
   server k8s-api-1 ${CONTROL_PLANE_IPS[0]}:6443
-  server k8s-api-1 ${CONTROL_PLANE_IPS[1]}:6443
+  server k8s-api-2 ${CONTROL_PLANE_IPS[1]}:6443
 EOF
 
 firewall-cmd --zone=public --add-port=6443/tcp --add-port=10250/tcp --permanent
