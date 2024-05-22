@@ -26,7 +26,8 @@ backend etcd
   server k8s-api-2 ${CONTROL_PLANE_IPS[1]}:2379
 EOF
 
-firewall-cmd --zone=public --add-port=6443/tcp --add-port=10250/tcp --permanent
-firewall-cmd --reload
+# firewall-cmd --zone=public --add-port=6443/tcp --add-port=10250/tcp --permanent
+# firewall-cmd --reload
 
+systemctl disable --now firewalld
 systemctl enable --now haproxy
