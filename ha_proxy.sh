@@ -9,11 +9,21 @@ frontend k8s-api
   mode tcp
   option tcplog
   default_backend k8s-api
+frontend etcd
+  bind ${HA_PROXY_SERVER}:2379
+  mode tcp
+  option tcplog
+  default_backend etcd
 backend k8s-api
   mode tcp
   balance roundrobin
   server k8s-api-1 ${CONTROL_PLANE_IPS[0]}:6443
   server k8s-api-2 ${CONTROL_PLANE_IPS[1]}:6443
+backend etcd
+  mode tcp
+  balance roundrobin
+  server k8s-api-1 ${CONTROL_PLANE_IPS[0]}:2379
+  server k8s-api-2 ${CONTROL_PLANE_IPS[1]}:2379
 EOF
 
 firewall-cmd --zone=public --add-port=6443/tcp --add-port=10250/tcp --permanent
