@@ -1,7 +1,7 @@
 #!/bin/bash
 #special thanks https://gist.github.com/inductor/32116c486095e5dde886b55ff6e568c8
 
-KUBE_API_SERVER_IP=192.168.100.
+KUBE_API_SERVER_IP=dev-lb-01
 KUBERNETES_VERSION=v1.29
 MANIFEST_VERSION=1.29.0
 REPO_CRIO_PATH=stable:/${KUBERNETES_VERSION}
