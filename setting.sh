@@ -6,13 +6,13 @@ GATEWAY_IP=192.168.100.1
 
 ## hosts
 cat >> /etc/hosts <<EOF
-192.168.100.200 haproxy-01
-192.168.100.210 controlplane-01
-192.168.100.211 controlplane-02
-192.168.100.212 controlplane-03
-192.168.100.220 dataplane-01
-192.168.100.221 dataplane-02
-192.168.100.222 dataplane-03
+192.168.100.200 dev-lb-01
+192.168.100.210 dev-master-01
+192.168.100.211 dev-master-02
+192.168.100.212 dev-master-03
+192.168.100.220 dev-node-01
+192.168.100.221 dev-node-02
+192.168.100.222 dev-node-03
 EOF
 
 ## SELinux無効
