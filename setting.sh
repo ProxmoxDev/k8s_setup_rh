@@ -4,6 +4,14 @@ NIC=ens18
 PRIVATE_IP=
 GATEWAY_IP=192.168.100.1
 
+## date
+timedatectl set-timezone  Asia/Tokyo
+dnf remove -y ntp*
+dnf install -y chrony
+echo '#Add TimeSync' >> /etc/chrony.conf
+echo 'server time.aws.com prefer iburst' >> /etc/chrony.conf
+systemctl enable --now chronyd
+
 ## hosts
 cat >> /etc/hosts <<EOF
 192.168.100.200 dev-lb-01
