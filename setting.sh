@@ -4,6 +4,17 @@ NIC=ens18
 PRIVATE_IP=
 GATEWAY_IP=192.168.100.1
 
+## hosts
+cat >> /etc/hosts <<EOF
+192.168.100.200 haproxy-01
+192.168.100.210 controlplane-01
+192.168.100.212 controlplane-02
+192.168.100.213 controlplane-03
+192.168.100.220 dataplane-01
+192.168.100.221 dataplane-02
+192.168.100.222 dataplane-03
+EOF
+
 ## SELinux無効
 sed -i -e 's/^\SELINUX=enforcing/SELINUX=disabled/' /etc/selinux/config
 
