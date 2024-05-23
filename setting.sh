@@ -8,8 +8,8 @@ GATEWAY_IP=192.168.100.1
 cat >> /etc/hosts <<EOF
 192.168.100.200 haproxy-01
 192.168.100.210 controlplane-01
-192.168.100.212 controlplane-02
-192.168.100.213 controlplane-03
+192.168.100.211 controlplane-02
+192.168.100.212 controlplane-03
 192.168.100.220 dataplane-01
 192.168.100.221 dataplane-02
 192.168.100.222 dataplane-03
