@@ -1,6 +1,7 @@
 #!/bin/bash
-KUBERNETES_VERSION=v1.29
-REPO_KUBERNETES_VERSION=1.29.0-150500.1.1
+KUBERNETES_VERSION=v1.30
+REPO_KUBERNETES_VERSION=1.30.1-150500.1.1
+
 
 ## Helm
 curl -fsSL -o get_helm.sh https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3
