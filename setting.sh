@@ -14,6 +14,7 @@ systemctl enable --now chronyd
 
 ## hosts
 cat >> /etc/hosts <<EOF
+192.168.100.111 dev-code-01
 192.168.100.200 dev-lb-01
 192.168.100.210 dev-master-01
 192.168.100.211 dev-master-02
@@ -21,6 +22,8 @@ cat >> /etc/hosts <<EOF
 192.168.100.220 dev-node-01
 192.168.100.221 dev-node-02
 192.168.100.222 dev-node-03
+192.168.100.230 dev-nfs-01
+192.168.100.240 dev-postgres-01
 EOF
 
 ## SELinux無効
