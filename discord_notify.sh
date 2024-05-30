@@ -10,14 +10,14 @@ cat <<EOF | tee /root/discord-notify/start.sh
 
 discordWebhook=$DISCORD_WEBHOOK_URL
 
-curl=`cat <<EOS
+curl=\`cat <<EOS
 curl
  --verbose
  -X POST
  ${discordWebhook}
  -H 'Content-Type: application/json'
  --data '{"content": "[XXXX] XXXX が起動しました"}'
-EOS`
+EOS\`
 eval ${curl}
 EOF
 
