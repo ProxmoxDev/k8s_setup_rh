@@ -18,7 +18,7 @@ curl
  -H 'Content-Type: application/json'
  --data '{"content": "[XXXX] XXXX が起動しました"}'
 EOS\`
-eval ${curl}
+eval \${curl}
 EOF
 
 cat <<EOF | tee /root/discord-notify/stop.sh
