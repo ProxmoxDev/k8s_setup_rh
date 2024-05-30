@@ -1,6 +1,7 @@
 #!/bin/bash
-KUBERNETES_VERSION=v1.30
-REPO_KUBERNETES_VERSION=1.30.1-150500.1.1
+KUBERNETES_VERSION=v1.28
+REPO_KUBERNETES_VERSION=1.28.6-150500.1.1
+ARGOCD_VERSION=v2.11.2
 
 ## docker
 yum install -y yum-utils \
@@ -15,6 +16,11 @@ yum install -y docker-ce docker-ce-cli containerd.io docker-compose-plugin
 curl -fsSL -o get_helm.sh https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3
 chmod 700 get_helm.sh
 ./get_helm.sh
+
+## ArgoCD CLI
+curl -sSL -o argocd-linux-amd64 https://github.com/argoproj/argo-cd/releases/download/$ARGOCD_VERSION/argocd-linux-amd64
+install -m 555 argocd-linux-amd64 /usr/local/bin/argocd
+rm -rf argocd-linux-amd64
 
 ## kubectl
 cat <<EOF | tee /etc/yum.repos.d/kubernetes.repo
