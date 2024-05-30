@@ -14,7 +14,7 @@ curl=\`cat <<EOS
 curl
  --verbose
  -X POST
- ${discordWebhook}
+ \${discordWebhook}
  -H 'Content-Type: application/json'
  --data '{"content": "[XXXX] XXXX が起動しました"}'
 EOS\`
@@ -26,15 +26,15 @@ cat <<EOF | tee /root/discord-notify/stop.sh
 
 discordWebhook=$DISCORD_WEBHOOK_URL
 
-curl=`cat <<EOS
+curl=\`cat <<EOS
 curl
  --verbose
  -X POST
- ${discordWebhook}
+ \${discordWebhook}
  -H 'Content-Type: application/json'
  --data '{"content": "[XXXX] XXXX を停止します"}'
-EOS`
-eval ${curl}
+EOS\`
+eval \${curl}
 EOF
 
 chmod +x /root/discord-notify/start.sh
