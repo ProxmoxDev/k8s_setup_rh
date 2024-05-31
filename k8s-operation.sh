@@ -5,7 +5,7 @@ ARGOCD_VERSION=v2.11.2
 
 ## Cloudflare Tunnel CLI
 curl -fsSL https://pkg.cloudflare.com/cloudflared-ascii.repo | sudo tee /etc/yum.repos.d/cloudflared.repo
-dnf update -y && dnf install -y cloudflared
+dnf install -y cloudflared
 
 ## docker
 yum install -y yum-utils \
