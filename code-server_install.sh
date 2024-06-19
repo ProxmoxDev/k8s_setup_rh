@@ -3,15 +3,13 @@
 ## install code-server
 curl -fsSL https://code-server.dev/install.sh | sh
 
-systemctl enable --now code-server@root
-
 cat > /root/.config/code-server/config.yaml <<EOF
 bind-addr: 0.0.0.0:8080
 auth: none
 cert: false
 EOF
 
-systemctl restart code-server@root
+systemctl enable --now code-server@root
 
 ## install nginx
 dnf install -y nginx
