@@ -16,12 +16,12 @@ systemctl enable --now chronyd
 cat >> /etc/hosts <<EOF
 192.168.100.110 dev-code-01
 192.168.100.200 dev-lb-01
-192.168.100.210 dev-master-01
-192.168.100.211 dev-master-02
-192.168.100.212 dev-master-03
-192.168.100.220 dev-node-01
-192.168.100.221 dev-node-02
-192.168.100.222 dev-node-03
+192.168.100.210 dev-k8s-master-01
+192.168.100.211 dev-k8s-master-02
+192.168.100.212 dev-k8s-master-03
+192.168.100.220 dev-k8s-worker-01
+192.168.100.221 dev-k8s-worker-02
+192.168.100.222 dev-k8s-worker-03
 192.168.100.230 dev-nfs-01
 EOF
 
