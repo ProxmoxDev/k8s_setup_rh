@@ -54,7 +54,6 @@ gpgkey=https://download.opensuse.org/repositories/isv:/cri-o:/stable:/$KUBERNETE
 EOF
 
 dnf install -y \
-  nfs-utils-1:2.5.4-25.el9.x86_64 \
   container-selinux \
   cri-o-${REPO_KUBERNETES_VERSION} \
   kubelet-${REPO_KUBERNETES_VERSION} \
