@@ -2,11 +2,9 @@
 #special thanks https://gist.github.com/inductor/32116c486095e5dde886b55ff6e568c8
 
 KUBE_API_SERVER_IP=dev-lb-01
-KUBERNETES_VERSION=v1.28
-MANIFEST_VERSION=1.28.6
-REPO_CRIO_PATH=stable:/${KUBERNETES_VERSION}
-REPO_KUBERNETES_VERSION=1.28.6-150500.1.1
-# REPO_KUBERNETES_VERSION=1.30.1-150500.1.1
+MANIFEST_VERSION=1.34.1
+KUBERNETES_VERSION=v1.34
+REPO_KUBERNETES_VERSION=1.34.1-150500.1.1
 
 ## デフォルトで入ってるコンテナパッケージを削除
 dnf remove -y containers-common
@@ -49,10 +47,10 @@ EOF
 cat <<EOF | tee /etc/yum.repos.d/cri-o.repo
 [cri-o]
 name=CRI-O
-baseurl=https://pkgs.k8s.io/addons:/cri-o:/$REPO_CRIO_PATH/rpm/
+baseurl=https://download.opensuse.org/repositories/isv:/cri-o:/stable:/$KUBERNETES_VERSION/rpm/
 enabled=1
 gpgcheck=1
-gpgkey=https://pkgs.k8s.io/addons:/cri-o:/$REPO_CRIO_PATH/rpm/repodata/repomd.xml.key
+gpgkey=https://download.opensuse.org/repositories/isv:/cri-o:/stable:/$KUBERNETES_VERSION/rpm/repodata/repomd.xml.key
 EOF
 
 dnf install -y \
