@@ -1,5 +1,5 @@
 KUBERNETES_VERSION=v1.34
-REPO_KUBERNETES_VERSION=1.34.1-150500.1.1
+REPO_KUBERNETES_VERSION=1.34.0-150500.1.1
 
 ## デフォルトで入ってるコンテナパッケージを削除
 dnf remove -y containers-common
